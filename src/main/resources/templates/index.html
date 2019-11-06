@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Tech Blog</h1>
+<div th:each="p:${list_of_posts}">
+    <h1 th:text="${p.getTitle()}"></h1>
+    <p th:text="${p.getBody()}"></p>
+    <p th:text="${p.getDate()}"></p>
+</div>
+</body>
+</html>
