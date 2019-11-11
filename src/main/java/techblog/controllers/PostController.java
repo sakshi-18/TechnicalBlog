@@ -1,4 +1,5 @@
 package techblog.controllers;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,23 +10,20 @@ import techblog.services.PostService;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Date;
 
 @Controller
-public class HomeController {
+public class PostController {
     @Autowired
-    PostService ps;
-    @RequestMapping("/home")
-    public String index(Model model , HttpSession session){
+    PostService postService;
 
-        User logged = (User)session.getAttribute("loggedUser");
-        if(logged!=null){
-            return "redirect:/posts";
+    @RequestMapping("/posts")
+    public String userPostPage(Model model, HttpSession session){
+        User logged= (User)session.getAttribute("loggedUser");
+        if(logged==null){
+            return "/user/login";
         }
-
-        ArrayList<Post> posts=ps.getAllPosts();
-        //sending list of posts
+        ArrayList<Post> posts = postService.getUserPost();
         model.addAttribute("list_of_posts",posts);
-        return "index";
+        return "posts";
     }
 }

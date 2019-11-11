@@ -6,6 +6,7 @@
 </head>
 <body>
 <h1>Tech Blog</h1>
+<header th:replace="layout :: logged_out"></header>
 <div th:each="p:${list_of_posts}">
     <h1 th:text="${p.getTitle()}"></h1>
     <p th:text="${p.getBody()}"></p>
